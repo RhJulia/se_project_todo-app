@@ -1,17 +1,20 @@
 # Simple Todo App
 
-Give a brief description of the project here. Feel free to give it a different name.
+This project is a simple and easy to use To-Do application.
 
 ## Functionality
 
-Give a more detailed explanation of the project and its functionality.
+It allows users to add new tasks with an option to add due date.
+Marks them as completed using checkboxes and allows users to delete tasks.
 
 ## Technology
 
-Give a description of the technologies and techniques used. Pictures, GIFs, or screenshots that detail the project features are recommended.
+JavaScript
+HTML
+CSS
 
 ## Deployment
 
 This project is deployed on GitHub Pages:
 
-- ADD LINK HERE
+- [ADD LINK HERE](https://github.com/RhJulia/se_project_todo-app.git)
