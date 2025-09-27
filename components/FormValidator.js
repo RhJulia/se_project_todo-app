@@ -1,10 +1,10 @@
 class formValidator {
   constructor(settings, formEl) {
-    this._inputSelector = settings._inputSelector;
-    this._submitButtonSelector = settings._submitButtonSelector;
-    this._errorClass = settings._errorClass;
-    this._inputErrorClass = settings._inputErrorClass;
-    this._inactiveButtonClass = settings._inactiveButtonClass;
+    this._inputSelector = settings.inputSelector;
+    this._submitButtonSelector = settings.submitButtonSelector;
+    this._errorClass = settings.errorClass;
+    this._inputErrorClass = settings.inputErrorClass;
+    this._inactiveButtonClass = settings.inactiveButtonClass;
     this._formEl = formEl;
   }
 
@@ -75,15 +75,6 @@ class formValidator {
     this._formEl.reset();
     this._buttonElement.classList.add(this._inactiveButtonClass);
     this._buttonElement.disabled = true;
-
-    this._inputList.forEach((inputElement) => {
-      const errorElement = this._formEl.querySelector(
-        `#${inputElement.id}-error`
-      );
-      inputElement.classList.remove(this._inputErrorClass);
-      errorElement.classList.remove(this._errorClass);
-      errorElement.textContent = "";
-    });
   }
 }
 
