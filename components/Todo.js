@@ -1,30 +1,44 @@
 class Todo {
-  constructor(data, selector) {
-    this._data = data;
+  constructor(data, selector, handleCheck, handleDelete) {
+    this._data = {
+      // provide sensible defaults in case fields are missing
+      id: data.id,
+      name: data.name,
+      completed: Boolean(data.completed),
+      date: data.date ?? null,
+    };
+
     this._templateElement = document.querySelector(selector);
+    this._handleCheck = handleCheck;
+    this._handleDelete = handleDelete;
   }
 
   _generateDueDate() {
-    const dueDate = new Date(this._data.date);
+    const dueDate = this._data.date ? new Date(this._data.date) : null;
 
-    // Only show the date if it's valid
-    if (!isNaN(dueDate)) {
+    if (dueDate instanceof Date && !Number.isNaN(dueDate.getTime())) {
       this._todoDate.textContent = `Due: ${dueDate.toLocaleString("en-US", {
         year: "numeric",
         month: "short",
         day: "numeric",
       })}`;
+    } else {
+      this._todoDate.textContent = "";
     }
   }
 
   _setEventListeners() {
     //TODO set up delete button handler
     this._todoDeleteBtn.addEventListener("click", () => {
+      const completed = this._data.completed;
+      this._handleDelete(completed);
       this._todoElement.remove();
     });
+
     //checkbox handler
     this._todoCheckboxEl.addEventListener("change", () => {
-      this._data.completed = !this._data.completed;
+      this._data.completed = this._todoCheckboxEl.checked;
+      this._handleCheck(this._data.completed);
     });
   }
 

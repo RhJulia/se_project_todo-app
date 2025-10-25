@@ -28,9 +28,6 @@ class Popup {
   setEventListeners() {
     //this one listsener will handle close button and modal listsner
     this._popupElement.addEventListener("mousedown", (evt) => {
-      //if the event target classList contains "popup__close or Popup"
-      //then close the modal
-      //youll need an if block that checks this condition.
       if (
         evt.target.classList.contains("popup__close") ||
         evt.target.classList.contains("popup")
