@@ -7,15 +7,32 @@ import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 
 const addTodoButton = document.querySelector(".button_action_add");
-const addTodoPopupEl = document.querySelector(".#add-todo-popup");
+const addTodoPopupEl = document.querySelector("#add-todo-popup");
 const addTodoForm = addTodoPopupEl.querySelector(".popup__form");
 const addTodoCloseBtn = addTodoPopupEl.querySelector(".popup__close");
 const todosList = document.querySelector(".todos__list");
 
 const addTodoPopup = new PopupWithForm({
-  PopupSelector: ".#add-todo-popup",
-  handleFormSubmit: () => {},
+  popupSelector: "#add-todo-popup",
+  handleFormSubmit: (inputValues) => {
+    //TODO - move code form existing submission handler here.
+    const name = inputValues.name;
+    const dateInput = inputValues.date;
+
+    // Create a date object and adjust for timezone
+    const date = new Date(dateInput);
+    date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
+
+    const id = uuidv4();
+    const values = { name, date, id };
+    const todo = generateTodo(values);
+    section.addItem(todo);
+
+    newTodoValidator.resetValidation();
+    addTodoPopup.close();
+  },
 });
+//handle date and time based on location.
 
 addTodoPopup.setEventListeners();
 
@@ -35,9 +52,9 @@ section.renderItems();
 //   modal.classList.add("popup_visible");
 // };
 
-const closeModal = (modal) => {
-  modal.classList.remove("popup_visible");
-};
+// const closeModal = (modal) => {
+//   modal.classList.remove("popup_visible");
+// };
 
 // The logic in this function should all be handled in the Todo class.
 const generateTodo = (data) => {
